@@ -3,4 +3,7 @@
 sftp.json
 !composer.json
 !composer.lock
-vendor/
+
+# Dependencies
+node_modules
+vendor
