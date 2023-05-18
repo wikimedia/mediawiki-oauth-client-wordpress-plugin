@@ -7,3 +7,4 @@ sftp.json
 # Dependencies
 node_modules
 vendor
+vendor/
