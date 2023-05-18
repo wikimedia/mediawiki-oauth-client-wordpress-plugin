@@ -1,10 +1,12 @@
 .DS_Store
 .vscode
 sftp.json
-!composer.json
-!composer.lock
 
 # Dependencies
 node_modules
 vendor
 vendor/
+
+# Exceptions
+!composer.json
+!composer.lock
