@@ -20,7 +20,7 @@
     "wordpress"
   ],
   "author": "",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-or-later",
   "bugs": {
     "url": "https://github.com/wikimedia/mediawiki-oauth-client-wordpress-plugin/issues"
   },
