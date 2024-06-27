@@ -48,5 +48,5 @@ abstract class ShortcodeAbstract {
 	 * @param mixed $content
 	 * @return string
 	 */
-	abstract public function render( $atts = array(), $content ): string;
+	abstract public function render( $atts = array(), $content = '' ): string;
 }

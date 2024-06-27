@@ -44,7 +44,7 @@ class MW_SSO_Login_Button extends ShortcodeAbstract {
 	 * @param mixed $content
 	 * @return string
 	 */
-	public function render( $atts = array(), $content ): string {
+	public function render( $atts = array(), $content = '' ): string {
 		$url   = Helpers::get_login_action_url();
 		$label = ! empty( $content ) ? wp_kses_post( $content ) : __( 'Login with MediaWiki' );
 
