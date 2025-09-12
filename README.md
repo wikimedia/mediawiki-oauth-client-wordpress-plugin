@@ -26,25 +26,16 @@ Even when bumping a major version, if the blocks provided by this plugin change 
 
 ### Publishing a Release
 
-Release management is done using GitHub's built-in Releases functionality. When you tag a commit on the `main` branch with a version number in the format `v#.#.#`, a release action will trigger when that tag is pushed to GitHub.
-The GitHub actions release workflow creates a new built release based on the contents of the tag you created.
-It copies the tag's current state to a new tag of `original/v.*.*.*`, then builds the project and pushes the built version to the original tag name `v*.*.*`.
-This allows composer to pull in a built version of the project without the need to run webpack to use it.
+Release builds are handled via a GitHub action which incrementally builds all merges to the `main` branch into a separate `release` branch that bundles its required OAuth dependencies into a local `vendor/` folder within the plugin directory.
 
-To prepare a release, follow these steps:
+The `release` branch may then be tagged for versioned installation via [composer](http://getcomposer.org/), and optionally marked as releases in GitHub for download. A project may also be set up to track the `dev-release` branch to always pull in the latest built beta version.
 
-0. Ensure you are on the `main` branch and that there are no uncommitted local changes.
-1. Depending on whether you are preparing a major, minor, or patch release (see [Versioning](#versioning) above), run one of these three NPM actions to update the version number throughout the project:
-  - `npm run bump:patch`: Update the project's version number to the next patch release number.
-  - `npm run bump:minor`: Update the project's version number to the next minor release number.
-  - `npm run bump:major`: Update the project's version number to the next major release number.
-2. Create a tag with the same number as the updated project version number, e.g. `v1.2.3`.
-3. Push the updated `main` branch and tag to GitHub.
+To prepare a full plugin release,
 
-Once a release has been created, update the release's description using GitHub's interface to add patch notes. Release notes should be high-level but complete, detailing all _New Features_, _Enhancements_, _Bug Fixes_ and potential other changes included in the according version.
+- Create a pull request "Prepare release vX.Y.Z" with a commit that increments the [plugin.php](./plugin.php) version number, _e.g._ v1.2.3
+- Merge your approved release-preparation PR into the `main` branch
+- Navigate to the [Tag and Release action within the GitHub Actions tab](https://github.com/wikimedia/mediawiki-oauth-client-wordpress-plugin/actions/workflows/tag-and-release.yml)
+- Click the "run workflow" button in the dispatch trigger banner, and fill in the same version as you specified in `plugin.php`, _e.g._ v1.2.3
+- Click "Run workflow" button
 
-### Development testing
-
-Any code merged into the `develop` branch will be build and committed to the `release-develop` branch. This branch can be used in non-production applications to validate and test proposed changes.
-
-### Changelog
+This should tag your release branch and create a [GitHub release](https://github.com/wikimedia/mediawiki-oauth-client-wordpress-plugin/releases).
