@@ -47,6 +47,17 @@ abstract class MWOAuthProvider extends AbstractProvider {
 	protected $restApiUrl; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase
 
 	/**
+	 * Returns default headers for all HTTP requests.
+	 *
+	 * @return array
+	 */
+	protected function getDefaultHeaders(): array {
+		return [
+			'User-Agent' => 'MW-OAuth-Client/1.0 (https://github.com/wikimedia/mediawiki-oauth-client-wordpress-plugin)',
+		];
+	}
+
+	/**
 	 * Returns a full REST Resource URL
 	 *
 	 * @param string $endpoint
