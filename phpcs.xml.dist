@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="Coding Standards">
+	<extensions>
+		<extension>php</extension>
+	</extensions>
+
+	<!-- Ignore vendor directory -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<rule ref="WordPress-VIP-Go">
+		<!-- Scanning JS is deprecated in PHPCS, and this plugin has none. -->
+		<exclude name="WordPressVIPMinimum.JS" />
+	</rule>
+</ruleset>
