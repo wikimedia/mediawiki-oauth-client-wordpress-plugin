@@ -126,7 +126,7 @@ abstract class MWOAuthProvider extends AbstractProvider {
 		if ( 200 !== $response->getStatusCode() ) {
 			$body = json_decode( $response->getBody(), ARRAY_A );
 
-			$message = $body['hint'];
+			$message = $body['hint'] ?? '';
 			throw new IdentityProviderException( $message, $response->getStatusCode(), $response );
 		}
 	}
