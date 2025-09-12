@@ -1,0 +1,101 @@
+name: Code Quality
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+      - synchronize
+    # Only run on a given PR if relevant files have changed.
+    paths:
+      - '**.php'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpcs.xml.dist'
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php:
+    name: PHPCS
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [ '8.2' ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Paths filters
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        id: paths
+        with:
+          filters: |
+            composer: &composer
+              - 'composer.json'
+              - 'composer.lock'
+            php: &php
+              - '**/*.php'
+            phpcs:
+              - *php
+              - *composer
+              - 'phpcs.xml.dist'
+          list-files: shell
+
+      - name: Set up PHP
+        if: steps.paths.outputs.phpcs == 'true'
+        uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2.35.4
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer, parallel-lint
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        if: steps.paths.outputs.phpcs == 'true'
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        id: cache-php-dependencies
+        if: steps.paths.outputs.phpcs == 'true'
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: php-${{ runner.os }}-${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
+
+      - name: Install Composer dependencies
+        if: steps.paths.outputs.phpcs == 'true'
+        run: composer install --no-progress --no-interaction --no-ansi
+
+      - name: Make Composer packages available globally
+        if: steps.paths.outputs.phpcs == 'true'
+        run: echo "${PWD}/vendor/bin" >> $GITHUB_PATH
+
+      - name: Check syntax (somewhat slow, only runs on branch pushes)
+        if: ${{ github.event_name != 'pull_request' && steps.paths.outputs.phpcs == 'true' }}
+        run: parallel-lint --exclude .git --exclude .github --exclude vendor --exclude content/plugins/restrict-content-pro/pro/includes/libraries .
+
+      - name: Lint on push or configuration change
+        id: phpcs
+        if: steps.paths.outputs.phpcs == 'true' && steps.paths.outputs.php != 'true'
+        run: |
+            composer lint -- --report-full --report-checkstyle=./phpcs-report.xml
+
+      - name: Report PHPCS results
+        if: always() && github.event_name == 'pull_request' && steps.phpcs.outcome == 'failure'
+        run: |
+          cs2pr ./phpcs-report.xml

@@ -10,7 +10,8 @@
         "league/oauth2-client": "^2.6.0"
     },
     "require-dev": {
-        "automattic/vipwpcs": "^3.0"
+        "automattic/vipwpcs": "^3.0",
+        "staabm/annotate-pull-request-from-checkstyle": "^1.8"
     },
     "scripts": {
         "lint": "phpcs -s plugin.php lib",
