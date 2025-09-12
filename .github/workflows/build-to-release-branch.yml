@@ -71,6 +71,15 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction --no-ansi --no-dev
 
+      # Since we bundle the vendor/ folder, we do not want projects which depend
+      # on this plugin via Composer to re-install the packages in the parent vendor/
+      # dependencies folder.
+      - name: Remove bundled dependencies from composer.json
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          jq 'del(.require)' composer.json > composer.json.tmp && mv composer.json.tmp composer.json
+
       # Force-commit the vendor folder and push it to release branch.
       - name: Update release branch
         shell: bash
