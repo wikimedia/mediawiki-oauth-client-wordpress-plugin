@@ -42,20 +42,17 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: php-${{ runner.os }}-${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
 
-      - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction --no-ansi --no-dev
-
       - name: Configure git
         shell: bash
         run: |
-            git config user.name "GitHub Actions build script"
-            git config user.email "<>"
+          git config user.name "GitHub Actions build script"
+          git config user.email "<>"
 
       - name: Check out release branch
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-            ref: release
-            fetch-depth: 0
+          ref: release
+          fetch-depth: 0
 
       - name: Merge source into release branch
         shell: bash
@@ -63,18 +60,21 @@ jobs:
         # which do not apply to our current situation.
         # https://web.archive.org/web/20131126171744/http://www.seanius.net/blog/2011/02/git-merge-s-theirs/
         run: |
-            git fetch origin main
-            git fetch origin release
-            git checkout main
-            git checkout release
-            git merge -s ours main
-            git diff --binary main | git apply -R --index
-            git commit --amend -m "Merge branch main into release"
+          git fetch origin main
+          git fetch origin release
+          git checkout main
+          git checkout release
+          git merge -s ours main
+          git diff --binary main | git apply -R --index
+          git commit --amend -m "Merge branch main into release"
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction --no-ansi --no-dev
 
       # Force-commit the vendor folder and push it to release branch.
       - name: Update release branch
         shell: bash
         run: |
-            git add -f vendor/
-            git commit --amend -m "Build to release from main#$( git rev-parse --short main )"
-            git push origin release:release
+          git add -f composer.json vendor/
+          git commit --amend -m "Build to release from main#$( git rev-parse --short main )"
+          git push origin release:release

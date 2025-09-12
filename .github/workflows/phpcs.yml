@@ -93,7 +93,7 @@ jobs:
         id: phpcs
         if: steps.paths.outputs.phpcs == 'true' && steps.paths.outputs.php != 'true'
         run: |
-            composer lint -- --report-full --report-checkstyle=./phpcs-report.xml
+          composer lint -- --report-full --report-checkstyle=./phpcs-report.xml
 
       - name: Report PHPCS results
         if: always() && github.event_name == 'pull_request' && steps.phpcs.outcome == 'failure'
