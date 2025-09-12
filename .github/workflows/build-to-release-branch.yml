@@ -43,7 +43,7 @@ jobs:
           key: php-${{ runner.os }}-${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction --no-ansi
+        run: composer install --no-progress --no-interaction --no-ansi --no-dev
 
       - name: Configure git
         shell: bash
