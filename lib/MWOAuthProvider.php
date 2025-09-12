@@ -116,6 +116,7 @@ abstract class MWOAuthProvider extends AbstractProvider {
 			$body = json_decode( $response->getBody(), ARRAY_A );
 
 			$message = $body['hint'];
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			throw new IdentityProviderException( $message, $response->getStatusCode(), $response );
 		}
 	}
