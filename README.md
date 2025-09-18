@@ -1,14 +1,6 @@
 # MediaWiki OAUTH WordPress Plugin
 
-Developed by [Bradley Morris](mailto:hello@bradleymorris.co.uk) [Human Made](https://humanmade.com) and the [Wikimedia Foundation](https://wikimediafoundation.org). Maintained by [Human Made](https://humanmade.com) and the [Wikimedia Foundation](https://wikimediafoundation.org).
-
-Stable tag: 
-
-## Development
-
-
-----
-
+Developed by [Bradley Morris](mailto:hello@bradleymorris.co.uk), [Human Made](https://humanmade.com), and the [Wikimedia Foundation](https://wikimediafoundation.org). Maintained by [Human Made](https://humanmade.com) and the [Wikimedia Foundation](https://wikimediafoundation.org).
 
 ## Release Process
 

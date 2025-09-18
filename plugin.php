@@ -3,7 +3,7 @@
  * The main file for the MediaWiki OAuth Client plugin. Included by WordPress during the bootstrap process.
  *
  * @package     mediawiki\wp-oauth-client
- * @author      Brad Morris <hello@bradleymorris.co.uk>
+ * @author      Wikimedia Foundation, Brad Morris <hello@bradleymorris.co.uk>, Human Made <hello@humanmade.com>
  * @license     https://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (or later)
  * @copyright   Wikimedia Foundation
  *
@@ -11,12 +11,11 @@
  * Plugin Name:         MediaWiki OAuth Client
  * Plugin URI:
  * Description:         Provides SSO between your WordPress site and any MediaWiki application with the OAuth extension enabled
- * Author:              Brad Morris (Codeable)
- * Author URI:          https://codeable.io/developers/brad-morris/
+ * Author:              <a href="https://wikimediafoundation.org/">Wikimedia Foundation</a>, <a href="https://codeable.io/developers/brad-morris/">Brad Morris (Codeable)</a>, <a href="https://humanmade.com">Human Made</a>
  *
- * Version:             1.1.0
- * Requires at least:   4.2
- * Tested up to:        5.4
+ * Version:             1.2.0
+ * Requires at least:   6.3
+ * Tested up to:        6.8.2
  *
  * Text Domain:         mw-oauth
  * Domain Path:         /lang/
