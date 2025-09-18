@@ -9,14 +9,20 @@
     "automattic/vipwpcs": "^3.0",
     "staabm/annotate-pull-request-from-checkstyle": "^1.8"
   },
+  "autoload": {
+    "psr-4": {
+      "MW\\Lib\\": "lib/",
+      "MW\\WPOAuth\\": "src/"
+    }
+  },
   "scripts": {
     "lint": "phpcs -s plugin.php lib",
     "lint:fix": "phpcbf -s plugin.php lib"
   },
   "config": {
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "composer/installers": true
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

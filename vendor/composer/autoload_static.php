@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c
+class ComposerStaticInitf30a53255941e8da618a1b7a1d973e7d
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -17,6 +17,11 @@ class ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+        ),
+        'M' => 
+        array (
+            'MW\\WPOAuth\\' => 11,
+            'MW\\Lib\\' => 7,
         ),
         'L' => 
         array (
@@ -43,6 +48,14 @@ class ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'MW\\WPOAuth\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+        'MW\\Lib\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
         ),
         'League\\OAuth2\\Client\\' => 
         array (
@@ -73,9 +86,9 @@ class ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit29b079c3647950c8a7e15a5cd9508e2c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf30a53255941e8da618a1b7a1d973e7d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf30a53255941e8da618a1b7a1d973e7d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf30a53255941e8da618a1b7a1d973e7d::$classMap;
 
         }, null, ClassLoader::class);
     }
