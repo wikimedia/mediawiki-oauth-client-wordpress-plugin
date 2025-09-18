@@ -1,6 +1,5 @@
 {
   "name": "wikimedia/mediawiki-oauth-client-wordpress-plugin",
-  "version": "1.0.0",
   "description": "MediaWiki OAuth Client WordPress Plugin.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",

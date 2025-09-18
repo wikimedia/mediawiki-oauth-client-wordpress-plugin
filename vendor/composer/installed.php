@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wikimedia/mediawiki-oauth-client-wordpress-plugin',
-        'pretty_version' => '1.0.0',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '8bd4546481e78784eae443b57c9eb215001bc133',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -131,9 +131,9 @@
             'dev_requirement' => false,
         ),
         'wikimedia/mediawiki-oauth-client-wordpress-plugin' => array(
-            'pretty_version' => '1.0.0',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8bd4546481e78784eae443b57c9eb215001bc133',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
