@@ -136,7 +136,10 @@ class UserStore {
 
 		$suffixed_username = $username . $index;
 
-		$final_username = ! username_exists( $suffixed_username ) ? $suffixed_username : static::generate_unique_username( $username, $index );
+		$final_username = $suffixed_username;
+		if ( username_exists( $suffixed_username ) )  {
+			$final_username = static::generate_unique_username( $username, $index );
+		}
 
 		static::maybe_log_changed_username( $original_username, $final_username );
 
