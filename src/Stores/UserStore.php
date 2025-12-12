@@ -165,7 +165,7 @@ class UserStore {
 			return;
 		} 
 		
-		if( $original_username === $final_username ) {
+		if ( $original_username === $final_username ) {
 			return;
 		}
 
