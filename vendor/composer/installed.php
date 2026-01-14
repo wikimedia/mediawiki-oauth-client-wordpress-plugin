@@ -3,7 +3,7 @@
         'name' => 'wikimedia/mediawiki-oauth-client-wordpress-plugin',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8bd4546481e78784eae443b57c9eb215001bc133',
+        'reference' => '9d9bd78c1bedb417e7765c458d98ff8e5f1cd8b4',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -133,7 +133,7 @@
         'wikimedia/mediawiki-oauth-client-wordpress-plugin' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8bd4546481e78784eae443b57c9eb215001bc133',
+            'reference' => '9d9bd78c1bedb417e7765c458d98ff8e5f1cd8b4',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
