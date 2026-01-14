@@ -25,6 +25,7 @@ namespace MW\WPOAuth\Stores;
 
 use Exception;
 use WP_User_Query;
+use const MEDIAWIKI_OAUTH_DEBUG;
 
 /**
  * Contains a number of helpful functions used to interact with User records in
@@ -117,9 +118,12 @@ class UserStore {
 	 */
 	public static function generate_unique_username( string $username, int $index = 0, $limit = 25 ): string {
 
+		$original_username = $username;
+
 		$username = sanitize_user( $username );
 
 		if ( ! username_exists( $username ) ) {
+			static::maybe_log_changed_username( $original_username, $username );
 			return $username;
 		}
 
@@ -132,7 +136,14 @@ class UserStore {
 
 		$suffixed_username = $username . $index;
 
-		return ! username_exists( $suffixed_username ) ? $suffixed_username : static::generate_unique_username( $username, $index );
+		$final_username = $suffixed_username;
+		if ( username_exists( $suffixed_username ) )  {
+			$final_username = static::generate_unique_username( $username, $index );
+		}
+
+		static::maybe_log_changed_username( $original_username, $final_username );
+
+		return $final_username;
 	}
 
 	/**
@@ -142,5 +153,25 @@ class UserStore {
 	public static function is_sso_user( int $user_id ): bool {
 		$token = get_user_meta( $user_id, '_mwoauth_token', true );
 		return ! $token || empty( $token );
+	}
+
+	/**
+	 * If our username has been changed (due to removing special characters, or adding a suffix), log this.
+	 *
+	 * @param string $original_username
+	 * @param string $final_username
+	 * @return void
+	 */
+	public static function maybe_log_changed_username( string $original_username, string $final_username ) : void {
+
+		if ( ! defined( 'MEDIAWIKI_OAUTH_DEBUG' ) || empty( MEDIAWIKI_OAUTH_DEBUG ) ) {
+			return;
+		} 
+		
+		if ( $original_username === $final_username ) {
+			return;
+		}
+
+		error_log( "Medawiki OAuth: User $original_username was changed to $final_username on import to WordPress." );
 	}
 }
