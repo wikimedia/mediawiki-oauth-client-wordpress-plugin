@@ -69,7 +69,7 @@ final class SettingsContextualHelp {
 			<dd><?php esc_html_e( 'User identity verification only with access to real name and email address, no ability to read pages or act on a user\'s behalf.', 'mw-oauth' ); ?></dd>
 		</dl>
 		<h2><?php esc_html_e( 'General Settings', 'mw-oauth' ); ?></h2>
-		<p><?php wp_kses( __( 'Where possible, you should use http<strong>s</strong>:// for your REST API address. The plugin will accept plain http, although this is strongly discouraged as it presents numerous security issues.', 'mw-oauth' ), array( 'strong' ) ); ?></p>
+		<p><?php echo wp_kses( __( 'Where possible, you should use http<strong>s</strong>:// for your REST API address. The plugin will accept plain http, although this is strongly discouraged as it presents numerous security issues.', 'mw-oauth' ), array( 'strong' ) ); ?></p>
 		<?php
 	}
 }
